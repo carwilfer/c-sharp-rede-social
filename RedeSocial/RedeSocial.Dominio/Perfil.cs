@@ -10,5 +10,6 @@ namespace RedeSocial.Dominio
         public string Email { get; set; }
         public string Bio { get; set; }
         public string UrlFoto { get; set; }
+        public string OwnderId { get; set; }
     }
 }
