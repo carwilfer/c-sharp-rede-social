@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RedeSocial.Apresentacao.Models.PerfilModels;
 using RedeSocial.Apresentacao.Services;
-using RedeSocial.Infraestrutura;
+using RedeSocial.Infraestrutura.Arquivos;
 
 namespace RedeSocial.Apresentacao.Controllers
 {
@@ -44,7 +44,6 @@ namespace RedeSocial.Apresentacao.Controllers
 
         // POST: Perfils/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(PerfilInputModel model, IFormFile foto)
         {
             try

@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RedeSocial.Dominio;
 
-namespace RedeSocial.Aplicacao.Data
+namespace RedeSocial.Infraestrutura.BancoDeDados
 {
     public class RedeSocialDbContext : DbContext
     {
-        public RedeSocialDbContext (DbContextOptions<RedeSocialDbContext> options)
+        public RedeSocialDbContext(DbContextOptions<RedeSocialDbContext> options)
             : base(options)
         {
         }

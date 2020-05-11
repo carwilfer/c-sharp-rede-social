@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RedeSocial.Aplicacao.Servicos;
+using RedeSocial.Dominio;
 
 namespace RedeSocial.Aplicacao.Controllers
 {
@@ -11,36 +13,20 @@ namespace RedeSocial.Aplicacao.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        // GET: api/Post
-        [HttpGet]
-        public IEnumerable<string> Get()
+        public PostController(IPostRepository db)
         {
-            return new string[] { "value1", "value2" };
+            Db = db;
         }
 
-        // GET: api/Post/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        public IPostRepository Db { get; }
 
         // POST: api/Post
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody]PostRequest request)
         {
-        }
+            var postServices = new PostServices(Db);
 
-        // PUT: api/Post/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            postServices.CriarPost(request);
         }
     }
 }

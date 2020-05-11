@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using RedeSocial.Aplicacao.Data;
+using RedeSocial.Infraestrutura.BancoDeDados;
 
 namespace RedeSocial.Aplicacao
 {

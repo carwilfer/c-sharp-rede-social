@@ -7,7 +7,13 @@ namespace RedeSocial.Dominio
     public class Post
     {
         public int Id { get; set; }
-        public Perfil Owner { get; set; }
         public string Texto { get; set; }
+        public string UrlFoto { get; set; }
+        public string Proprietario { get; set; }
+    }
+
+    public interface IPostRepository
+    {
+        void Salvar(Post post);
     }
 }

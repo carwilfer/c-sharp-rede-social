@@ -5,38 +5,54 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RedeSocial.Apresentacao.Models.PostModels;
+using RedeSocial.Apresentacao.Services;
+using RedeSocial.Infraestrutura.Arquivos;
 
 namespace RedeSocial.Apresentacao.Controllers
 {
     [Authorize]
     public class PostsController : Controller
     {
+        public IRedeSocialApi RedeSocialApi { get; }
+        public IArmazenamentoDeFotos ArmazenamentoDeFotos { get; }
+
+        public PostsController(IRedeSocialApi redeSocialApi, IArmazenamentoDeFotos armazenamentoDeFotos)
+        {
+            RedeSocialApi = redeSocialApi;
+            ArmazenamentoDeFotos = armazenamentoDeFotos;
+        }
+
         // GET: Posts
         public ActionResult Index()
         {
-            return View();
+            var posts = Posts.Where(x => x.Proprietario == User.Identity.Name);
+
+            return View(Posts);
         }
 
         // GET: Posts/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var post = Posts.Find(x => x.Id == id);
+
+            return View(post);
         }
 
-        // GET: Posts/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+
+        static List<PostViewModel> Posts = new List<PostViewModel>();
 
         // POST: Posts/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(PostInputModel post, IFormFile foto)
         {
             try
             {
-                // TODO: Add insert logic here
+                var uri = ArmazenamentoDeFotos.ArmazenarFotoDoPost(foto);
+
+                post.UrlIagem = uri.ToString();
+
+                RedeSocialApi.Post("post", post);
 
                 return RedirectToAction(nameof(Index));
             }

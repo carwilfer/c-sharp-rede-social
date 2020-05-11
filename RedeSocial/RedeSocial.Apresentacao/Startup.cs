@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RedeSocial.Apresentacao.Services;
-using RedeSocial.Infraestrutura;
+using RedeSocial.Infraestrutura.Arquivos;
 
 namespace RedeSocial.Apresentacao
 {
@@ -30,6 +30,7 @@ namespace RedeSocial.Apresentacao
             services.AddRazorPages();
 
             services.AddSingleton<IArmazenamentoDeFotos, ArmazenamentoDeFotosAzureBlobStorage>();
+
             services.AddSingleton<IRedeSocialApi, RedeSocialApi>();
         }
 

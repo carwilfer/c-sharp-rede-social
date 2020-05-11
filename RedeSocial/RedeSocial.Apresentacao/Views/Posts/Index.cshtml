@@ -5,11 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h2>Posts</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<form action="/posts/create" method="post" enctype="multipart/form-data">
+    <label>Escreve ai!!!</label><br />
+    <input type="text" name="texto" value="" /><br />
+    <input type="file" name="foto" value="" /><br />
+    <input type="submit" value="Postar" /><br />
+</form>
+<br />
+
 <table class="table">
     <thead>
         <tr>
@@ -20,17 +25,18 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Texto)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Texto)
+                    <a href="/posts/details/@item.Id"><img src="@item.UrlImagem" href="" alt="Foto do post" /></a>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
