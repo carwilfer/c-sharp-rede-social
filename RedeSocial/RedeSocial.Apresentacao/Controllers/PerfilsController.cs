@@ -1,15 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RedeSocial.Apresentacao.Models.PerfilModels;
+using RedeSocial.Apresentacao.Services;
+using RedeSocial.Infraestrutura;
 
 namespace RedeSocial.Apresentacao.Controllers
 {
     public class PerfilsController : Controller
     {
-        // GET: Perfils
+        public IArmazenamentoDeFotos ArmazenamentoDeFotos { get; }
+        public IRedeSocialApi RedeSocialApi { get; }
+
+        public PerfilsController(
+            IArmazenamentoDeFotos armazenamentoDeFotos,
+            IRedeSocialApi redeSocialApi)
+        {
+            ArmazenamentoDeFotos = armazenamentoDeFotos;
+            RedeSocialApi = redeSocialApi;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -30,17 +45,21 @@ namespace RedeSocial.Apresentacao.Controllers
         // POST: Perfils/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(PerfilInputModel model, IFormFile foto)
         {
             try
             {
-                // TODO: Add insert logic here
+                var uri = await ArmazenamentoDeFotos.ArmazenarFotoDePerfil(foto);
 
-                return RedirectToAction(nameof(Index));
+                model.UrlFoto = uri.AbsoluteUri;
+
+                await RedeSocialApi.Post("perfil", model);
+
+                return RedirectToAction("index", "home");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                return base.ValidationProblem();
             }
         }
 

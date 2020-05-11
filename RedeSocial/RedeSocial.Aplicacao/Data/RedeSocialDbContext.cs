@@ -14,6 +14,7 @@ namespace RedeSocial.Aplicacao.Data
         {
         }
 
-        public DbSet<RedeSocial.Dominio.Perfil> Perfil { get; set; }
+        public DbSet<Perfil> Perfil { get; set; }
+        public DbSet<Post> Post { get; set; }
     }
 }
