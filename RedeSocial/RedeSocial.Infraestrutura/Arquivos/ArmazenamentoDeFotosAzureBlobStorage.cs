@@ -8,7 +8,7 @@ namespace RedeSocial.Infraestrutura.Arquivos
 
     public class ArmazenamentoDeFotosAzureBlobStorage : IArmazenamentoDeFotos
     {
-        const string connectionString = @"DefaultEndpointsProtocol=https;AccountName=aularedesocial;AccountKey=seVNfBtCIdsLZCKYgSlK10/jFItUBS2QWpzgsbWn4/dCHWT/Y7Nam9CYCVfYcHd/HLVCdPYIpH/hXEyXnh5k8Q==;EndpointSuffix=core.windows.net";
+        const string connectionString = @"#";
 
         public async Task<Uri> ArmazenarFotoDePerfil(IFormFile foto)
         {
