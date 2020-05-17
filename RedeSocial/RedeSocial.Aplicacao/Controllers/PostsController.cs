@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RedeSocial.Aplicacao.Servicos;
+using RedeSocial.Aplicacao.Servicos.PostsServices;
 using RedeSocial.Dominio.Repositorio;
 
 namespace RedeSocial.Aplicacao.Controllers
@@ -28,10 +28,21 @@ namespace RedeSocial.Aplicacao.Controllers
             return Ok(posts);
         }
 
-        [HttpPost]
-        public void Post([FromBody]PostRequest request)
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
         {
-            PostServices.CriarPost(request);
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody]PostRequest request)
+        {
+            var result = PostServices.CriarPost(request);
+
+            if (result.Sucesso)
+                return Ok();
+            else
+                return UnprocessableEntity(result.Erros);
         }
     }
 }

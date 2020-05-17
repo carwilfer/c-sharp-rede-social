@@ -12,9 +12,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using RedeSocial.Infraestrutura.BancoDeDados;
-using RedeSocial.Aplicacao.Servicos;
 using RedeSocial.Dominio.Repositorio;
 using RedeSocial.Infraestrutura.BancoDeDados.Repositorios;
+using RedeSocial.Aplicacao.Servicos.PostsServices;
 
 namespace RedeSocial.Aplicacao
 {

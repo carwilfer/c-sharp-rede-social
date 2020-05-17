@@ -34,9 +34,9 @@ namespace RedeSocial.Apresentacao.Controllers
         [HttpPost]
         public ActionResult Create(PostInputModel post, IFormFile foto)
         {
-            var uri = ArmazenamentoDeFotos.ArmazenarFotoDoPost(foto);
+            //var uri = ArmazenamentoDeFotos.ArmazenarFotoDoPost(foto);
 
-            post.UrlIagem = uri.ToString();
+            //post.UrlIagem = uri.ToString();
 
             post.Proprietario = User.Identity.Name;
 

@@ -2,13 +2,13 @@
 using RedeSocial.Dominio.Repositorio;
 using System.Collections.Generic;
 
-namespace RedeSocial.Aplicacao.Servicos
+namespace RedeSocial.Aplicacao.Servicos.PostsServices
 {
     public interface IPostServices
     {
         IPostRepository PostRepository { get; }
 
-        void CriarPost(PostRequest postData);
+        PostCreateResult CriarPost(PostRequest postData);
         IEnumerable<Post> ObterTodosPosts();
     }
 }

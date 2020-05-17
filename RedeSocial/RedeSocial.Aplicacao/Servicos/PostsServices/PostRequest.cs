@@ -1,4 +1,4 @@
-﻿namespace RedeSocial.Aplicacao.Servicos
+﻿namespace RedeSocial.Aplicacao.Servicos.PostsServices
 {
     public class PostRequest
     {
