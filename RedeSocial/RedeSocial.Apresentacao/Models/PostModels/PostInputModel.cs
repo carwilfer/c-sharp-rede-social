@@ -9,5 +9,6 @@ namespace RedeSocial.Apresentacao.Models.PostModels
     {
         public string Texto { get; set; }
         public string UrlIagem { get; set; }
+        public string Proprietario { get; set; }
     }
 }

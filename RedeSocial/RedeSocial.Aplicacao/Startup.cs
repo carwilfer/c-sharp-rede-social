@@ -12,6 +12,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using RedeSocial.Infraestrutura.BancoDeDados;
+using RedeSocial.Aplicacao.Servicos;
+using RedeSocial.Dominio.Repositorio;
+using RedeSocial.Infraestrutura.BancoDeDados.Repositorios;
 
 namespace RedeSocial.Aplicacao
 {
@@ -31,6 +34,9 @@ namespace RedeSocial.Aplicacao
 
             services.AddDbContext<RedeSocialDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("RedeSocialDbContext")));
+
+            services.AddScoped<IPostServices, PostServices>();
+            services.AddScoped<IPostRepository, PostRepositoryEntityFramework>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

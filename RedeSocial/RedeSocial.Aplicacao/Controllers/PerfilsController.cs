@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RedeSocial.Aplicacao.Data;
-using RedeSocial.Dominio;
+using RedeSocial.Dominio.Modelo;
+using RedeSocial.Infraestrutura.BancoDeDados;
 
 namespace RedeSocial.Aplicacao.Controllers
 {

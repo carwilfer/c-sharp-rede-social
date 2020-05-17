@@ -1,7 +1,8 @@
-﻿using System;
-using RedeSocial.Dominio;
+﻿using System.Collections.Generic;
+using RedeSocial.Dominio.Modelo;
+using RedeSocial.Dominio.Repositorio;
 
-namespace RedeSocial.Infraestrutura.BancoDeDados
+namespace RedeSocial.Infraestrutura.BancoDeDados.Repositorios
 {
     public class PostRepositoryEntityFramework : IPostRepository
     {
@@ -11,6 +12,11 @@ namespace RedeSocial.Infraestrutura.BancoDeDados
         }
 
         public RedeSocialDbContext Db { get; }
+
+        public IEnumerable<Post> ObterTodos()
+        {
+            return Db.Post;
+        }
 
         public void Salvar(Post post)
         {

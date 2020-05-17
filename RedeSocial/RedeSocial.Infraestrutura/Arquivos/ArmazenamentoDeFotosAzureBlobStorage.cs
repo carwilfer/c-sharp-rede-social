@@ -31,6 +31,9 @@ namespace RedeSocial.Infraestrutura.Arquivos
 
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("fotos-posts");
 
+            if (containerClient == null)
+                blobServiceClient.CreateBlobContainer("fotos-posts");
+
             BlobClient blobClient = containerClient.GetBlobClient(foto.FileName);
 
             try

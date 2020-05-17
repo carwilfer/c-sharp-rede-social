@@ -4,23 +4,23 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RedeSocial.Aplicacao.Data;
+using RedeSocial.Infraestrutura.BancoDeDados;
 
-namespace RedeSocial.Aplicacao.Migrations
+namespace RedeSocial.Infraestrutura.Migrations
 {
     [DbContext(typeof(RedeSocialDbContext))]
-    [Migration("20200511120803_post-migrate")]
-    partial class postmigrate
+    [Migration("20200517200803_mig-init")]
+    partial class miginit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
+                .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("RedeSocial.Dominio.Perfil", b =>
+            modelBuilder.Entity("RedeSocial.Dominio.Modelo.Perfil", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,7 +50,7 @@ namespace RedeSocial.Aplicacao.Migrations
                     b.ToTable("Perfil");
                 });
 
-            modelBuilder.Entity("RedeSocial.Dominio.Post", b =>
+            modelBuilder.Entity("RedeSocial.Dominio.Modelo.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

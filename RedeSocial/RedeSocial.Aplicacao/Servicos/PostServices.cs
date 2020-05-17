@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RedeSocial.Dominio;
+using RedeSocial.Dominio.Modelo;
+using RedeSocial.Dominio.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RedeSocial.Aplicacao.Servicos
 {
-    public class PostServices
+    public class PostServices : IPostServices
     {
         public PostServices(IPostRepository postRepository)
         {
@@ -23,6 +24,11 @@ namespace RedeSocial.Aplicacao.Servicos
             post.UrlFoto = postData.UrlImagem;
 
             PostRepository.Salvar(post);
+        }
+
+        public IEnumerable<Post> ObterTodosPosts()
+        {
+            return PostRepository.ObterTodos();
         }
     }
 }

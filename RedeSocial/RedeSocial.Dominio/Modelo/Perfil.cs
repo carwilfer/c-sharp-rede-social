@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RedeSocial.Dominio
+﻿namespace RedeSocial.Dominio.Modelo
 {
     public class Perfil
     {

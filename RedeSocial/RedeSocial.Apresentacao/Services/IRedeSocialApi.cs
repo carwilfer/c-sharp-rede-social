@@ -7,9 +7,9 @@ namespace RedeSocial.Apresentacao.Services
 {
     public interface IRedeSocialApi
     {
+        Task<T> Get<T>(string recurso, object filtros) where T : class;
         Task Post(string recurso, object dados);
         ActionResult Put(string recurso, object dados);
         ActionResult Delete(string recurso, object dados);
-        IEnumerable<T> Get<T>(string recurso, object filtros) where T : class;
     }
 }

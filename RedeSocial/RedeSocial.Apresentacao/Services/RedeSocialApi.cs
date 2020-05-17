@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,26 @@ namespace RedeSocial.Apresentacao.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> Get<T>(string recurso, object filtros) where T : class
+        public async Task<T> Get<T>(string recurso, object filtros) where T : class
         {
-            throw new NotImplementedException();
+            var httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("http://localhost:5000")
+            };
+            httpClient.DefaultRequestHeaders.Add("accept", "application/json");
+
+            var responseMessage = await httpClient.GetAsync("/api/" + recurso);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var content = await responseMessage.Content.ReadAsStringAsync();
+
+                return JsonConvert.DeserializeObject<T>(content);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public async Task Post(string recurso, object dados)
@@ -35,7 +53,7 @@ namespace RedeSocial.Apresentacao.Services
 
             if (responseMessage.IsSuccessStatusCode)
             {
-
+                 
             }
             else
             {

@@ -14,8 +14,8 @@ namespace RedeSocial.Apresentacao.Controllers
     [Authorize]
     public class PostsController : Controller
     {
-        public IRedeSocialApi RedeSocialApi { get; }
-        public IArmazenamentoDeFotos ArmazenamentoDeFotos { get; }
+        private IRedeSocialApi RedeSocialApi { get; }
+        private IArmazenamentoDeFotos ArmazenamentoDeFotos { get; }
 
         public PostsController(IRedeSocialApi redeSocialApi, IArmazenamentoDeFotos armazenamentoDeFotos)
         {
@@ -23,66 +23,26 @@ namespace RedeSocial.Apresentacao.Controllers
             ArmazenamentoDeFotos = armazenamentoDeFotos;
         }
 
-        // GET: Posts
-        public ActionResult Index()
+        [HttpGet]
+        public async Task<ActionResult> Index()
         {
-            var posts = Posts.Where(x => x.Proprietario == User.Identity.Name);
+            var posts = await RedeSocialApi.Get<IEnumerable<PostViewModel>>("posts", null);
 
-            return View(Posts);
+            return View(posts);
         }
 
-        // GET: Posts/Details/5
-        public ActionResult Details(int id)
-        {
-            var post = Posts.Find(x => x.Id == id);
-
-            return View(post);
-        }
-
-
-        static List<PostViewModel> Posts = new List<PostViewModel>();
-
-        // POST: Posts/Create
         [HttpPost]
         public ActionResult Create(PostInputModel post, IFormFile foto)
         {
-            try
-            {
-                var uri = ArmazenamentoDeFotos.ArmazenarFotoDoPost(foto);
+            var uri = ArmazenamentoDeFotos.ArmazenarFotoDoPost(foto);
 
-                post.UrlIagem = uri.ToString();
+            post.UrlIagem = uri.ToString();
 
-                RedeSocialApi.Post("post", post);
+            post.Proprietario = User.Identity.Name;
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            RedeSocialApi.Post("post", post);
 
-        // GET: Posts/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Posts/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Posts/Delete/5
