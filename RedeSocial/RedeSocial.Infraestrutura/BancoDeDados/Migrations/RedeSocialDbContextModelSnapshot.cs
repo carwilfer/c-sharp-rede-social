@@ -3,9 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RedeSocial.Aplicacao.Data;
 
-namespace RedeSocial.Aplicacao.Migrations
+namespace RedeSocial.Infraestrutura.BancoDeDados.Migrations
 {
     [DbContext(typeof(RedeSocialDbContext))]
     partial class RedeSocialDbContextModelSnapshot : ModelSnapshot

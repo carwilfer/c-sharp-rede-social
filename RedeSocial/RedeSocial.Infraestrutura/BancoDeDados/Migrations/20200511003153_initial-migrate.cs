@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace RedeSocial.Aplicacao.Migrations
+namespace RedeSocial.Infraestrutura.BancoDeDados.Migrations
 {
     public partial class initialmigrate : Migration
     {
