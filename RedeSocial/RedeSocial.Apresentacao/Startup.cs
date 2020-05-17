@@ -13,7 +13,7 @@ using RedeSocial.Infraestrutura.Arquivos;
 
 namespace RedeSocial.Apresentacao
 {
-    public class Startup
+    public class Startup 
     {
         public Startup(IConfiguration configuration)
         {
